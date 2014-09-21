@@ -13,4 +13,5 @@ addpath('imdb');
 addpath('vis/pool5-explorer');
 addpath('examples');
 addpath('rcnn');
+addpath('localize');
 fprintf('Startup Done\n');
