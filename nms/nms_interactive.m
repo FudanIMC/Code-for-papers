@@ -1,4 +1,4 @@
-function pick = nms(boxes, overlap)
+function pick = nms_interactive(im, boxes, overlap)
 % Non-maximum suppression.
 %   pick = nms(boxes, overlap) 
 % 
@@ -46,6 +46,7 @@ else
     last = length(I);
     i = I(last);
     pick = [pick; i];
+    showboxesc(im, boxes(i,:), 'g', '-');
     suppress = [last];
     for pos = 1:last-1
       j = I(pos);
@@ -61,8 +62,15 @@ else
         o = inter / (area(j) + area(i) - inter);
         if o > overlap
           suppress = [suppress; pos];
+          showboxesc([], boxes(j,:), 'r', '-');
+        else
+          showboxesc([], boxes(j,:), 'b', '-');
         end
+      else
+        showboxesc([], boxes(j,:), 'b', '-');
       end
+      title(sprintf('score: %.3f\n', boxes(i,end)));
+      pause;
     end
     I(suppress) = [];
   end  

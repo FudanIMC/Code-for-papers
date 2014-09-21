@@ -1,4 +1,4 @@
-function pick = nms(boxes, overlap)
+function pick = nms2(boxes, thresh_smaller, thresh_larger)
 % Non-maximum suppression.
 %   pick = nms(boxes, overlap) 
 % 
@@ -59,7 +59,8 @@ else
         % compute overlap
         inter = w*h;
         o = inter / (area(j) + area(i) - inter);
-        if o > overlap
+        if ((area(j) <= area(i)) && (o > thresh_smaller)) || ...
+           ((area(j) > area(i)) && (o > thresh_larger))
           suppress = [suppress; pos];
         end
       end
