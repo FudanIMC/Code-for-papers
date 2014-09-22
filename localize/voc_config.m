@@ -126,8 +126,7 @@ conf = cv(conf, 'paths.self', fullfile(pwd(), [mfilename() '.m']));
 conf = cv(conf, 'pascal.year', PASCAL_YEAR);
 
 % Directory with PASCAL VOC development kit and dataset
-conf = cv(conf, 'pascal.dev_kit', [conf.paths.base_dir '/VOC' ...
-                                   conf.pascal.year '/VOCdevkit/']);
+conf = cv(conf, 'pascal.dev_kit', [conf.paths.base_dir '/VOC2007/VOCdevkit/']);
 % For INRIA person                                   
 %conf = cv(conf, 'pascal.dev_kit', [conf.paths.base_dir '/INRIA/VOCdevkit/']);
 
