@@ -19,7 +19,7 @@ typedef int mwIndex;
 #define INF HUGE_VAL
 
 void print_null(const char *s) {}
-void print_string_matlab(const char *s) {}
+void print_string_matlab(const char *s) {mexPrintf(s);}
 
 void exit_with_help()
 {

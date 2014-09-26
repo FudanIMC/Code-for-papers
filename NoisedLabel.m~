@@ -1,4 +1,4 @@
-function [mAP]=NoisedLabel(theta)
+function [mAP]=NoisedLabel
 
 clear; clc; load('Pool5Feature.mat'); X_trn = SiftFlow_TrainX; X_tst = SiftFlow_TestX;
 SiftFlow_TrainY(:,16)=[]; SiftFlow_TrainY(:,11)=[]; SiftFlow_TrainY(:,9)=[]; 
@@ -8,7 +8,7 @@ SiftFlow_TrainN = SiftFlow_TrainY;
 
 for k=1:30
   for j=1:2488
-    if (rand(1)<theta)
+    if (rand(1)<0.1)
       SiftFlow_TrainN(j,k) = 1-SiftFlow_TrainN(j,k);
     end
   end
@@ -17,7 +17,7 @@ end
 for k=1:30
   Y_trn = SiftFlow_TrainN(:,k); 
   Y_tst = SiftFlow_TestY(:,k);
-  model = train(Y_trn,sparse(double(X_trn)));
+  model = train(Y_trn,sparse(double(X_trn)),'-s 2');
   [X,Y,Z] = predict(Y_tst,sparse(double(X_tst)),model);
   SiftFlow_PreY(:,k) = X; AP(k) = Y(1);
 end
