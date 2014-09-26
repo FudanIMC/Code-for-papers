@@ -6,5 +6,7 @@ for k=1:33
   Y_trn = SiftFlow_TrainY(:,k); 
   Y_tst = SiftFlow_TestY(:,k);
   model = train(Y_trn,sparse(double(X_trn)));
-  Y_hat = predict(Y_tst,sparse(X_tst),model);
+  [Y_hat,AP(k),Temp] = predict(Y_tst,sparse(double(X_tst)),model);
 end
+
+mean(AP)

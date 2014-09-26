@@ -155,7 +155,7 @@ void l2r_lr_fun::Xv(double *v, double *Xv)
 	int i;
 	int l=prob->l;
 	feature_node **x=prob->x;
-
+#pragma omp parallel for private (i)
 	for(i=0;i<l;i++)
 	{
 		feature_node *s=x[i];
@@ -303,7 +303,7 @@ void l2r_l2_svc_fun::Xv(double *v, double *Xv)
 	int i;
 	int l=prob->l;
 	feature_node **x=prob->x;
-
+#pragma omp parallel for private (i)
 	for(i=0;i<l;i++)
 	{
 		feature_node *s=x[i];
@@ -320,7 +320,7 @@ void l2r_l2_svc_fun::subXv(double *v, double *Xv)
 {
 	int i;
 	feature_node **x=prob->x;
-
+#pragma omp parallel for private (i)
 	for(i=0;i<sizeI;i++)
 	{
 		feature_node *s=x[I[i]];
@@ -2388,26 +2388,35 @@ model* train(const problem *prob, const parameter *param)
 			else
 			{
 				model_->w=Malloc(double, w_size*nr_class);
-				double *w=Malloc(double, w_size);
+#pragma omp parallel for private(i) 
 				for(i=0;i<nr_class;i++)
 				{
+					problem sub_prob_omp;
+					sub_prob_omp.l = l;
+					sub_prob_omp.n = n;
+					sub_prob_omp.x = x;
+					sub_prob_omp.y = Malloc(double,l);
+
 					int si = start[i];
 					int ei = si+count[i];
 
-					k=0;
-					for(; k<si; k++)
-						sub_prob.y[k] = -1;
-					for(; k<ei; k++)
-						sub_prob.y[k] = +1;
-					for(; k<sub_prob.l; k++)
-						sub_prob.y[k] = -1;
+					double *w=Malloc(double, w_size);
 
-					train_one(&sub_prob, param, w, weighted_C[i], param->C);
+					int t=0;
+					for(; t<si; t++)
+						sub_prob_omp.y[t] = -1;
+					for(; t<ei; t++)
+						sub_prob_omp.y[t] = +1;
+					for(; t<sub_prob_omp.l; t++)
+						sub_prob_omp.y[t] = -1;
+
+					train_one(&sub_prob_omp, param, w, weighted_C[i], param->C);
 
 					for(int j=0;j<w_size;j++)
 						model_->w[j*nr_class+i] = w[j];
+					free(sub_prob_omp.y);
+					free(w);
 				}
-				free(w);
 			}
 
 		}
