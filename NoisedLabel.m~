@@ -1,5 +1,3 @@
-function [mAP]=NoisedLabel
-
 clear; clc; load('Pool5Feature.mat'); X_trn = SiftFlow_TrainX; X_tst = SiftFlow_TestX;
 SiftFlow_TrainY(:,16)=[]; SiftFlow_TrainY(:,11)=[]; SiftFlow_TrainY(:,9)=[]; 
 SiftFlow_TestY(:,16)=[]; SiftFlow_TestY(:,11)=[]; SiftFlow_TestY(:,9)=[]; 
@@ -7,12 +5,19 @@ Change=ones(1,30); Change(25)=0; Change(29)=0; Change(6)=0; Change(14)=0; Change
 SiftFlow_TrainN = SiftFlow_TrainY;
 
 for k=1:30
+  if (Change(k)) threshold=0.05; else threshold=0.05; end
   for j=1:2488
-    if (rand(1)<0.1)
+    if (rand(1)<threshold)
       SiftFlow_TrainN(j,k) = 1-SiftFlow_TrainN(j,k);
     end
   end
 end 
+
+NL = zeros(1,10);
+for i=1:2488
+  YY = SiftFlow_TrainN(i,:); Y = SiftFlow_TrainY(i,:);
+  changed = size(find(YY~=Y),2); NL(changed+1) = NL(changed+1) + 1;
+end
 
 for k=1:30
   Y_trn = SiftFlow_TrainN(:,k); 
@@ -22,4 +27,5 @@ for k=1:30
   SiftFlow_PreY(:,k) = X; AP(k) = Y(1);
 end
 
-mAP = mean(AP);
+mAP = mean(AP)
+NL

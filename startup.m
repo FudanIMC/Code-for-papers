@@ -15,4 +15,7 @@ addpath('vis/pool5-explorer');
 addpath('examples');
 addpath('rcnn');
 addpath('localize');
+run('external/vlfeat/toolbox/vl_setup')
+maxNumCompThreads(32);
+setenv('OMP_NUM_THREADS','32');
 fprintf('Startup Done\n');

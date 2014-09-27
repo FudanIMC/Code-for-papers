@@ -18,8 +18,6 @@ for i = 1:200
   SiftFlow_TestX(i,:) = rcnn_features(im, [1,1,size(im)], rcnn_model);
 end
 
-LabelList = importdata('./datasets/SiftFlow/LabelList.txt');
-
 for k = 1:2488
   load(['./datasets/SiftFlow/SemanticLabels/' LabelList{k}]);
   labels=zeros(1,33);

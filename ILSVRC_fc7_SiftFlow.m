@@ -1,7 +1,7 @@
 ImageList = importdata('./datasets/SiftFlow/ImageList.txt');
 LabelList = importdata('./datasets/SiftFlow/LabelList.txt');
 
-rcnn_model = rcnn_create_model('./model-defs/ilsvrc_batch_256_output_fc7.prototxt', './data/caffe_nets/ilsvrc_2014_train_iter_610k');
+rcnn_model = rcnn_create_model(1,'./model-defs/ilsvrc_batch_256_output_fc7.prototxt', './data/caffe_nets/ilsvrc_2014_train_iter_610k');
 rcnn_model = rcnn_load_model(rcnn_model);
 rcnn_model.detectors.crop_mode = 'wrap';
 rcnn_model.detectors.crop_padding = 16;
