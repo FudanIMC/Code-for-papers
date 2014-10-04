@@ -31,11 +31,12 @@ fprintf('--> PLSA started with %d topics, %d documents, and %d word vocabulary.\
 if nargin<4; wt    = normalize( rand(W,T), 1); end
 if nargin<5; learn = 1; end
 
-td   = normalize( ones(T,D), 1); plo = 0;
+td   = normalize( ones(T,D), 1);
 
 tot  = sum(counts(:));
 done = 0;
 iter = 1;
+plo  = 0;
 
 E = sum( counts.*log( wt*td  +eps) ,1);
 F = sum( E ) / tot;;
@@ -51,7 +52,7 @@ while ~done; iter = iter+ 1;
    E = sum( counts.*log( wt*td  +eps) ,1); 
    F_new = sum( E ) / tot; F =  [F F_new];
         
-   rel_ch = (F(iter) - F(iter-1))/abs(F(iter-1)); if (iter> itern ); done=1; end
+   rel_ch = (F(iter) - F(iter-1))/abs(F(iter-1)); if (iter>itern) done=1;end
    
    fprintf('iteration %3d F = %f rel-ch = %.6f \n', iter-1, F(iter), rel_ch); 
    
