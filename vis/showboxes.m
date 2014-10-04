@@ -1,4 +1,4 @@
-function showboxes(im, boxes, out)
+function showboxes(im, boxes, color, out)
 % Draw bounding boxes on top of an image.
 %   showboxes(im, boxes, out)
 %
@@ -18,7 +18,7 @@ function showboxes(im, boxes, out)
 % your project.
 % -------------------------------------------------------
 
-if nargin > 2
+if nargin > 3
   % different settings for producing pdfs
   print = true;
   %wwidth = 2.25;
@@ -100,7 +100,7 @@ if ~isempty(boxes)
       c = 'b';
       s = '-';
     end
-    line([x1 x1 x2 x2 x1]', [y1 y2 y2 y1 y1]', 'color', c, 'linewidth', cwidth, 'linestyle', s);
+    line([x1 x1 x2 x2 x1]', [y1 y2 y2 y1 y1]', 'color', color, 'linewidth', cwidth, 'linestyle', s);
   end
 end
 

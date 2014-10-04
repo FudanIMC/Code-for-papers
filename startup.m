@@ -15,6 +15,7 @@ addpath('vis/pool5-explorer');
 addpath('examples');
 addpath('rcnn');
 addpath('localize');
+addpath('external/caffe');
 addpath('external/pLSA');
 addpath('external/VOCcode');
 run('external/vlfeat/toolbox/vl_setup')
