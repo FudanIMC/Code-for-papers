@@ -1,4 +1,4 @@
-function rcnn_exp_cache_features(chunk)
+function rcnn_exp_cache_features(chunk,year)
 
 % -------------------- CONFIG --------------------
 net_file     = './data/caffe_nets/finetune_voc_2007_trainval_iter_70k';
@@ -7,13 +7,13 @@ crop_mode    = 'warp';
 crop_padding = 16;
 
 % change to point to your VOCdevkit install
-VOCdevkit = './datasets/VOCdevkit2007';
+VOCdevkit = ['./datasets/VOCdevkit' year];
 % ------------------------------------------------
 
-imdb_train = imdb_from_voc(VOCdevkit, 'train', '2007');
-imdb_val   = imdb_from_voc(VOCdevkit, 'val', '2007');
-imdb_test  = imdb_from_voc(VOCdevkit, 'test', '2007');
-imdb_trainval = imdb_from_voc(VOCdevkit, 'trainval', '2007');
+imdb_train = imdb_from_voc(VOCdevkit, 'train', year);
+imdb_val   = imdb_from_voc(VOCdevkit, 'val', year);
+imdb_test  = imdb_from_voc(VOCdevkit, 'test', year);
+imdb_trainval = imdb_from_voc(VOCdevkit, 'trainval', year);
 
 switch chunk
   case 'train'

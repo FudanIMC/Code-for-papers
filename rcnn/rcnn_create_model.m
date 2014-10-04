@@ -45,7 +45,7 @@ cnn.binary_file = cnn_binary_file;
 cnn.definition_file = cnn_definition_file;
 cnn.batch_size = batch_size;
 cnn.init_key = -1;
-cnn.input_size = 227;
+cnn.input_size = 224;
 % load the ilsvrc image mean
 data_mean_file = './external/caffe/matlab/caffe/ilsvrc_2012_mean.mat';
 assert(exist(data_mean_file, 'file') ~= 0);

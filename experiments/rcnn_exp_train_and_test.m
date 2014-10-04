@@ -1,4 +1,4 @@
-function [res_test, res_train] = rcnn_exp_train_and_test()
+function [res_test, res_train] = rcnn_exp_train_and_test(year)
 % Runs an experiment that trains an R-CNN model and tests it.
 
 % -------------------- CONFIG --------------------
@@ -10,11 +10,11 @@ layer        = 7;
 k_folds      = 0;
 
 % change to point to your VOCdevkit install
-VOCdevkit = './datasets/VOCdevkit2007';
+VOCdevkit = ['./datasets/VOCdevkit' year];
 % ------------------------------------------------
 
-imdb_train = imdb_from_voc(VOCdevkit, 'trainval', '2007');
-imdb_test = imdb_from_voc(VOCdevkit, 'test', '2007');
+imdb_train = imdb_from_voc(VOCdevkit, 'trainval', year);
+imdb_test = imdb_from_voc(VOCdevkit, 'test', year);
 
 [rcnn_model, rcnn_k_fold_model] = ...
     rcnn_train(imdb_train, ...
