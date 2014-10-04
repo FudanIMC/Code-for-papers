@@ -1,4 +1,5 @@
 *.m~
+*~
 data
 imdb
 feat_cache
