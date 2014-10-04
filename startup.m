@@ -16,6 +16,7 @@ addpath('examples');
 addpath('rcnn');
 addpath('localize');
 addpath('external/pLSA');
+addpath('external/VOCcode');
 run('external/vlfeat/toolbox/vl_setup')
 cd external/MCG
 install
