@@ -7,7 +7,7 @@ rcnn_model.detectors.crop_padding = 16;
 for i = 1:213988
   fprintf('Extract Seg Features: #%d\n', i);
   im = imread(['/home/zengsheng/VOC2012_trainvaltest_mask/' num2str(i) '.bmp']);
-  VOC2012_All(i,:) = rcnn_features(im, [1,1,size(im)], rcnn_model);
+  VOC2012_All(i,:) = rcnn_features(im, [1,1,size(im,2),size(im,1)], rcnn_model);
 end
 
 save('VOC2012_All.mat','VOC2012_All','-v7.3'); exit;
