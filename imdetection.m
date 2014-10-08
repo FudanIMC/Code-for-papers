@@ -11,4 +11,4 @@ for i=box(2):box(4)
     end
   end
 end
-accu = accu/((box(3)-box(1))*(box(4)-box(2)));
+accu = accu/((box(3)-box(1)+1)*(box(4)-box(2)+1));
