@@ -1,4 +1,4 @@
-clear; clc; load('./datasets/SiftFlow.mat'); X_trn = SiftFlow_TrainX; X_tst = SiftFlow_TestX;
+clear; clc; load('/DATACENTER/3/Datasets/SiftFlow.mat'); X_trn = SiftFlow_TrainX; X_tst = SiftFlow_TestX;
 SiftFlow_TrainY(:,16)=[]; SiftFlow_TrainY(:,11)=[]; SiftFlow_TrainY(:,9)=[]; 
 SiftFlow_TestY(:,16)=[]; SiftFlow_TestY(:,11)=[]; SiftFlow_TestY(:,9)=[]; 
 Change=ones(1,30); Change(25)=0; Change(29)=0; Change(6)=0; Change(14)=0; Change(19)=0;
